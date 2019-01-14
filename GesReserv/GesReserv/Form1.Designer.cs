@@ -28,13 +28,85 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.tablaReservas = new System.Windows.Forms.DataGridView();
+            this.btnSigMes = new System.Windows.Forms.Button();
+            this.btnAntMes = new System.Windows.Forms.Button();
+            this.btnMes = new System.Windows.Forms.Button();
+            this.btnNuevaReserva = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaReservas)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // tablaReservas
+            // 
+            this.tablaReservas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tablaReservas.Location = new System.Drawing.Point(12, 59);
+            this.tablaReservas.Name = "tablaReservas";
+            this.tablaReservas.RowTemplate.Height = 24;
+            this.tablaReservas.Size = new System.Drawing.Size(776, 379);
+            this.tablaReservas.TabIndex = 0;
+            // 
+            // btnSigMes
+            // 
+            this.btnSigMes.Location = new System.Drawing.Point(744, 13);
+            this.btnSigMes.Name = "btnSigMes";
+            this.btnSigMes.Size = new System.Drawing.Size(44, 40);
+            this.btnSigMes.TabIndex = 1;
+            this.btnSigMes.Text = ">";
+            this.btnSigMes.UseVisualStyleBackColor = true;
+            this.btnSigMes.Click += new System.EventHandler(this.btnSigMes_Click);
+            // 
+            // btnAntMes
+            // 
+            this.btnAntMes.Location = new System.Drawing.Point(186, 12);
+            this.btnAntMes.Name = "btnAntMes";
+            this.btnAntMes.Size = new System.Drawing.Size(44, 40);
+            this.btnAntMes.TabIndex = 2;
+            this.btnAntMes.Text = "<";
+            this.btnAntMes.UseVisualStyleBackColor = true;
+            this.btnAntMes.Click += new System.EventHandler(this.btnAntMes_Click);
+            // 
+            // btnMes
+            // 
+            this.btnMes.Location = new System.Drawing.Point(236, 12);
+            this.btnMes.Name = "btnMes";
+            this.btnMes.Size = new System.Drawing.Size(502, 40);
+            this.btnMes.TabIndex = 3;
+            this.btnMes.Text = "Mes";
+            this.btnMes.UseVisualStyleBackColor = true;
+            // 
+            // btnNuevaReserva
+            // 
+            this.btnNuevaReserva.Location = new System.Drawing.Point(12, 12);
+            this.btnNuevaReserva.Name = "btnNuevaReserva";
+            this.btnNuevaReserva.Size = new System.Drawing.Size(168, 40);
+            this.btnNuevaReserva.TabIndex = 4;
+            this.btnNuevaReserva.Text = "Nueva Reserva";
+            this.btnNuevaReserva.UseVisualStyleBackColor = true;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnNuevaReserva);
+            this.Controls.Add(this.btnMes);
+            this.Controls.Add(this.btnAntMes);
+            this.Controls.Add(this.btnSigMes);
+            this.Controls.Add(this.tablaReservas);
+            this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.tablaReservas)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridView tablaReservas;
+        private System.Windows.Forms.Button btnSigMes;
+        private System.Windows.Forms.Button btnAntMes;
+        private System.Windows.Forms.Button btnMes;
+        private System.Windows.Forms.Button btnNuevaReserva;
     }
 }
 
