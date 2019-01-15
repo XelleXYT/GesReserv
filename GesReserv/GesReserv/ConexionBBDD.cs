@@ -21,14 +21,20 @@ namespace GesReserv
         private static MySqlCommand comando;
         private MySqlDataReader resultado;
 
-        public void iniciaConexion()
+        private void iniciaConexion()
         {
             conexion = new MySqlConnection("Server = 127.0.0.1; Database = gesreserv; Uid = root; Pwd = root; Port = 3306");
             conexion.Open();
         }
+        
+        private void cierraConexion()
+        {
+            conexion.Close();
+        }
 
         public DataTable cargaDatos(String consulta)
         {
+            iniciaConexion();
             DataTable datos = new DataTable();
 
             comando = new MySqlCommand(consulta, conexion);
@@ -36,8 +42,30 @@ namespace GesReserv
             resultado = comando.ExecuteReader();
 
             datos.Load(resultado);
+            
+            cierraConexion();
 
             return datos;
+        }
+
+        public void insertaDatos(DateTime f_entrada, DateTime f_salida, String cliente, String n_hab)
+        {
+            iniciaConexion();
+            String f_in = f_entrada.Year + "-" + f_entrada.Month + "-" + f_entrada.Day;
+            String f_out = f_salida.Year + "-" + f_salida.Month + "-" + f_salida.Day;
+            comando = conexion.CreateCommand();
+            comando.CommandText = "INSERT INTO gesreserv.reservas(fecha_entrada,fecha_salida,cliente,n_habitacion) VALUES('" + f_in +"','"+ f_out +"','"+ cliente +"','"+ n_hab + "');";
+            comando.ExecuteNonQuery();
+            cierraConexion();
+        }
+
+        public void ejecutaQuerry(String querry)
+        {
+            iniciaConexion();
+            comando = conexion.CreateCommand();
+            comando.CommandText = querry;
+            comando.ExecuteNonQuery();
+            cierraConexion();
         }
 
 

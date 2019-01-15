@@ -1,6 +1,6 @@
 ﻿namespace GesReserv
 {
-    partial class Form1
+    partial class VentanaPrincipal
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -38,12 +38,18 @@
             // 
             // tablaReservas
             // 
+            this.tablaReservas.AllowUserToAddRows = false;
+            this.tablaReservas.AllowUserToDeleteRows = false;
+            this.tablaReservas.AllowUserToResizeColumns = false;
+            this.tablaReservas.AllowUserToResizeRows = false;
             this.tablaReservas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tablaReservas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.tablaReservas.Location = new System.Drawing.Point(12, 59);
             this.tablaReservas.Name = "tablaReservas";
             this.tablaReservas.RowTemplate.Height = 24;
             this.tablaReservas.Size = new System.Drawing.Size(776, 379);
             this.tablaReservas.TabIndex = 0;
+            this.tablaReservas.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.tablaReservas_CellMouseClick);
             // 
             // btnSigMes
             // 
@@ -82,8 +88,9 @@
             this.btnNuevaReserva.TabIndex = 4;
             this.btnNuevaReserva.Text = "Nueva Reserva";
             this.btnNuevaReserva.UseVisualStyleBackColor = true;
+            this.btnNuevaReserva.Click += new System.EventHandler(this.btnNuevaReserva_Click);
             // 
-            // Form1
+            // VentanaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -93,8 +100,9 @@
             this.Controls.Add(this.btnAntMes);
             this.Controls.Add(this.btnSigMes);
             this.Controls.Add(this.tablaReservas);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.MaximizeBox = false;
+            this.Name = "VentanaPrincipal";
+            this.Text = "GesReserv";
             ((System.ComponentModel.ISupportInitialize)(this.tablaReservas)).EndInit();
             this.ResumeLayout(false);
 
