@@ -45,11 +45,13 @@
             this.tablaReservas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tablaReservas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.tablaReservas.Location = new System.Drawing.Point(12, 59);
+            this.tablaReservas.MultiSelect = false;
             this.tablaReservas.Name = "tablaReservas";
+            this.tablaReservas.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.Empty;
             this.tablaReservas.RowTemplate.Height = 24;
             this.tablaReservas.Size = new System.Drawing.Size(776, 379);
             this.tablaReservas.TabIndex = 0;
-            this.tablaReservas.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.tablaReservas_CellMouseClick);
+            this.tablaReservas.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.tablaReservas_CellMouseDoubleClick);
             // 
             // btnSigMes
             // 

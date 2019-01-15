@@ -176,10 +176,12 @@ namespace GesReserv
             nr.Show();
         }
 
-        private void tablaReservas_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void tablaReservas_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             NuevaReserva nr = new NuevaReserva(this);
             nr.Show();
+            tablaReservas.ClearSelection();
+            this.Enabled = false;
         }
     }
 

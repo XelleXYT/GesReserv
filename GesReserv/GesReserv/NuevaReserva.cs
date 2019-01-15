@@ -33,7 +33,7 @@ namespace GesReserv
             DateTime tAux = dtpFechaEntrada.Value.Date;
             bool hOcupada = false;
 
-            Console.WriteLine(ts.Days);
+            //Console.WriteLine(ts.Days); // Consola - Comprueba el número de días de la reserva.
 
             for (int i = 0; i < ts.Days; i++)
             {
@@ -47,7 +47,7 @@ namespace GesReserv
                 }
 
                 tAux = tAux.AddDays(1);
-                Console.WriteLine(tString);
+                //Console.WriteLine(tString); // Consola - Comprueba la fecha enviada mediante la querry.
             }
 
             if (!hOcupada)
@@ -58,6 +58,7 @@ namespace GesReserv
                     MessageBox.Show("Reserva añadida correctamnte.", "Reserva añadida");
                     ventanaPrincipal.cargaBBDD();
                     ventanaPrincipal.cargaValores();
+                    ventanaPrincipal.Enabled = true;
                     this.Dispose();
                 }
                 catch
@@ -73,7 +74,15 @@ namespace GesReserv
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            ventanaPrincipal.Enabled = true;
             this.Dispose();
+        }
+
+        //Método de establecimiento de acción en cierre.
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            ventanaPrincipal.Enabled = true;
         }
     }
 }
