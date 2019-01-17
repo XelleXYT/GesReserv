@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace GesReserv
@@ -17,20 +18,33 @@ namespace GesReserv
         public DataTable datosReservas = new DataTable();
         public DataTable[] calendario = new DataTable[13];
         public ConexionBBDD conexionBBDD;
-        private int mes = 1;
+        public int mes = 1;
         private int anno = 2019;
 
         public VentanaPrincipal()
         {
             InitializeComponent();
             cargaBBDD();
-            tablaReservas.DataSource = calendario[mes];
-
             cargaValores();
-
+            tablaReservas.DataSource = calendario[mes];
             //cargaColores();
+            //cargaHabitaciones();
 
-            btnMes.Text = dimeMes(mes) + " - " + anno.ToString();
+            tablaReservas.Columns[0].Visible = false;
+            for (int i = 1; i < tablaReservas.ColumnCount; i++)
+            {
+                tablaReservas.Columns[i].Width = 30;
+            }
+
+
+            new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+                Thread.Sleep(1000);
+                cargaColores();
+                cargaHabitaciones();
+            }).Start();
+
         }
 
         // cargaBBDD - Se encarga de cargar los datos de la base de datos en variables de instancia.
@@ -49,11 +63,13 @@ namespace GesReserv
             for (int i = 1; i <= 12; i++)
             {
                 calendario[i] = new DataTable();
+                
                 calendario[i].Columns.Add("Habitacion", typeof(String));
                 for (int j = 1; j <= DateTime.DaysInMonth(anno, i); j++)
                 {
                     calendario[i].Columns.Add(j.ToString(), typeof(String));
                 }
+
                 foreach (DataRow rowHabitaciones in datosHabitaciones.Rows)
                 {
                     calendario[i].Rows.Add(rowHabitaciones.Field<int>(0));
@@ -88,27 +104,44 @@ namespace GesReserv
                 }
             }
 
-            cargaColores();
+
 
             tablaReservas.DataSource = calendario[mes];
+            //cargaColores();
+            btnMes.Text = dimeMes(mes) + " - " + anno.ToString();
         }
 
+        // cargaHabitaciones - Se encarga de cargar los títulos de las líneas del calendario.
+
+            public void cargaHabitaciones()
+        {
+            for (int row = 0; row < tablaReservas.RowCount; row++)
+            {
+                tablaReservas.Rows[row].HeaderCell.Value = tablaReservas.Rows[row].Cells[0].Value.ToString();
+            }
+        }
 
 
         // cargaColores - Se encarga de cambiar el color y el texto de las celdas reservadas.
         public void cargaColores()
         {
-            for (int col = 0; col < tablaReservas.ColumnCount; col++)
+            foreach (DataGridViewRow row in tablaReservas.Rows)
             {
-                for (int row = 0; row < tablaReservas.RowCount; row++)
+                foreach (DataGridViewCell cell in row.Cells)
                 {
-                    if (Convert.ToString(tablaReservas[col, row].Value).Equals("X"))
+                    if (cell.Value.Equals("X"))
                     {
-                        //Console.WriteLine("Cell"); // Consola - Comprueba que exista una celda con "X" como contenido.
-                        DataGridViewCellStyle newCellStyle = new DataGridViewCellStyle();
-                        newCellStyle.BackColor = Color.Red;
-                        //tablaReservas.Rows[row].Cells[col].Value = "Reservado";
-                        tablaReservas.Rows[row].Cells[col].Style = newCellStyle;
+                        //Console.WriteLine("Celda Roja");
+                        cell.Style.ForeColor = Color.LightCoral;
+                        cell.Style.BackColor = Color.LightCoral;
+                    }
+                    else if (cell.Value.ToString() == "")
+                    {
+                        cell.Style.BackColor = Color.LightGreen;
+                    }
+                    else
+                    {
+                        cell.Style.BackColor = Color.LightYellow;
                     }
                 }
             }
@@ -157,6 +190,7 @@ namespace GesReserv
                 mes++;
                 tablaReservas.DataSource = calendario[mes];
                 btnMes.Text = dimeMes(mes) + " - " + anno.ToString();
+                cargaColores();
             }
         }
 
@@ -167,6 +201,7 @@ namespace GesReserv
                 mes--;
                 tablaReservas.DataSource = calendario[mes];
                 btnMes.Text = (dimeMes(mes) + " - " + anno.ToString());
+                cargaColores();
             }
         }
 
@@ -182,6 +217,12 @@ namespace GesReserv
             nr.Show();
             tablaReservas.ClearSelection();
             this.Enabled = false;
+        }
+
+        private void btnNuevoCliente_Click(object sender, EventArgs e)
+        {
+            NuevaReserva nr = new NuevaReserva(this);
+            nr.Show();
         }
     }
 

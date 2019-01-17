@@ -24,6 +24,10 @@ namespace GesReserv
             {
                 cbHabitacion.Items.Add(ventanaPrincipal.datosHabitaciones.Rows[i][0]);
             }
+            for (int i = 0; i < ventanaPrincipal.datosClientes.Rows.Count; i++)
+            {
+                cbCliente.Items.Add(ventanaPrincipal.datosClientes.Rows[i][0]);
+            }
         }
 
         private void btnEnviar_Click(object sender, EventArgs e)
@@ -54,10 +58,13 @@ namespace GesReserv
             {
                 try
                 {
-                    conexionBBDD.insertaDatos(dtpFechaEntrada.Value.Date, dtpFechaSalida.Value.Date, textCliente.Text, cbHabitacion.Text);
+                    conexionBBDD.insertaDatos(dtpFechaEntrada.Value.Date, dtpFechaSalida.Value.Date, cbCliente.Text, cbHabitacion.Text);
                     MessageBox.Show("Reserva añadida correctamnte.", "Reserva añadida");
+                    ventanaPrincipal.mes = dtpFechaEntrada.Value.Month;
                     ventanaPrincipal.cargaBBDD();
                     ventanaPrincipal.cargaValores();
+                    ventanaPrincipal.cargaColores();
+                    ventanaPrincipal.cargaHabitaciones();
                     ventanaPrincipal.Enabled = true;
                     this.Dispose();
                 }

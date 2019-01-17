@@ -36,9 +36,9 @@
             this.lFechaEntrada = new System.Windows.Forms.Label();
             this.lFechaSalida = new System.Windows.Forms.Label();
             this.cbHabitacion = new System.Windows.Forms.ComboBox();
-            this.textCliente = new System.Windows.Forms.TextBox();
             this.btnEnviar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.cbCliente = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // dtpFechaEntrada
@@ -100,13 +100,6 @@
             this.cbHabitacion.Size = new System.Drawing.Size(272, 24);
             this.cbHabitacion.TabIndex = 8;
             // 
-            // textCliente
-            // 
-            this.textCliente.Location = new System.Drawing.Point(123, 145);
-            this.textCliente.Name = "textCliente";
-            this.textCliente.Size = new System.Drawing.Size(272, 22);
-            this.textCliente.TabIndex = 9;
-            // 
             // btnEnviar
             // 
             this.btnEnviar.Location = new System.Drawing.Point(320, 184);
@@ -128,6 +121,14 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // cbCliente
+            // 
+            this.cbCliente.FormattingEnabled = true;
+            this.cbCliente.Location = new System.Drawing.Point(123, 145);
+            this.cbCliente.Name = "cbCliente";
+            this.cbCliente.Size = new System.Drawing.Size(272, 24);
+            this.cbCliente.TabIndex = 10;
+            // 
             // NuevaReserva
             // 
             this.AcceptButton = this.btnEnviar;
@@ -135,7 +136,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(407, 228);
-            this.Controls.Add(this.textCliente);
+            this.Controls.Add(this.cbCliente);
             this.Controls.Add(this.cbHabitacion);
             this.Controls.Add(this.lFechaSalida);
             this.Controls.Add(this.lFechaEntrada);
@@ -163,8 +164,8 @@
         private System.Windows.Forms.Label lFechaEntrada;
         private System.Windows.Forms.Label lFechaSalida;
         private System.Windows.Forms.ComboBox cbHabitacion;
-        private System.Windows.Forms.TextBox textCliente;
         private System.Windows.Forms.Button btnEnviar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.ComboBox cbCliente;
     }
 }

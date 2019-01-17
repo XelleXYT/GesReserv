@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tablaReservas = new System.Windows.Forms.DataGridView();
             this.btnSigMes = new System.Windows.Forms.Button();
             this.btnAntMes = new System.Windows.Forms.Button();
             this.btnMes = new System.Windows.Forms.Button();
             this.btnNuevaReserva = new System.Windows.Forms.Button();
+            this.btnNuevoCliente = new System.Windows.Forms.Button();
+            this.lNApp = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.tablaReservas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,20 +45,35 @@
             this.tablaReservas.AllowUserToDeleteRows = false;
             this.tablaReservas.AllowUserToResizeColumns = false;
             this.tablaReservas.AllowUserToResizeRows = false;
-            this.tablaReservas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tablaReservas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tablaReservas.ColumnHeadersHeight = 25;
+            this.tablaReservas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.tablaReservas.DefaultCellStyle = dataGridViewCellStyle1;
             this.tablaReservas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.tablaReservas.Location = new System.Drawing.Point(12, 59);
+            this.tablaReservas.Location = new System.Drawing.Point(12, 114);
             this.tablaReservas.MultiSelect = false;
             this.tablaReservas.Name = "tablaReservas";
-            this.tablaReservas.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.Empty;
+            this.tablaReservas.RowHeadersWidth = 60;
             this.tablaReservas.RowTemplate.Height = 24;
-            this.tablaReservas.Size = new System.Drawing.Size(776, 379);
+            this.tablaReservas.Size = new System.Drawing.Size(776, 324);
             this.tablaReservas.TabIndex = 0;
             this.tablaReservas.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.tablaReservas_CellMouseDoubleClick);
             // 
             // btnSigMes
             // 
-            this.btnSigMes.Location = new System.Drawing.Point(744, 13);
+            this.btnSigMes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSigMes.Location = new System.Drawing.Point(744, 68);
             this.btnSigMes.Name = "btnSigMes";
             this.btnSigMes.Size = new System.Drawing.Size(44, 40);
             this.btnSigMes.TabIndex = 1;
@@ -65,7 +83,10 @@
             // 
             // btnAntMes
             // 
-            this.btnAntMes.Location = new System.Drawing.Point(186, 12);
+            this.btnAntMes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAntMes.Location = new System.Drawing.Point(12, 68);
             this.btnAntMes.Name = "btnAntMes";
             this.btnAntMes.Size = new System.Drawing.Size(44, 40);
             this.btnAntMes.TabIndex = 2;
@@ -75,16 +96,22 @@
             // 
             // btnMes
             // 
-            this.btnMes.Location = new System.Drawing.Point(236, 12);
+            this.btnMes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMes.Location = new System.Drawing.Point(62, 68);
             this.btnMes.Name = "btnMes";
-            this.btnMes.Size = new System.Drawing.Size(502, 40);
+            this.btnMes.Size = new System.Drawing.Size(676, 40);
             this.btnMes.TabIndex = 3;
             this.btnMes.Text = "Mes";
             this.btnMes.UseVisualStyleBackColor = true;
             // 
             // btnNuevaReserva
             // 
-            this.btnNuevaReserva.Location = new System.Drawing.Point(12, 12);
+            this.btnNuevaReserva.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNuevaReserva.Location = new System.Drawing.Point(620, 12);
             this.btnNuevaReserva.Name = "btnNuevaReserva";
             this.btnNuevaReserva.Size = new System.Drawing.Size(168, 40);
             this.btnNuevaReserva.TabIndex = 4;
@@ -92,11 +119,43 @@
             this.btnNuevaReserva.UseVisualStyleBackColor = true;
             this.btnNuevaReserva.Click += new System.EventHandler(this.btnNuevaReserva_Click);
             // 
+            // btnNuevoCliente
+            // 
+            this.btnNuevoCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNuevoCliente.Location = new System.Drawing.Point(12, 12);
+            this.btnNuevoCliente.Name = "btnNuevoCliente";
+            this.btnNuevoCliente.Size = new System.Drawing.Size(168, 40);
+            this.btnNuevoCliente.TabIndex = 5;
+            this.btnNuevoCliente.Text = "Nuevo Cliente";
+            this.btnNuevoCliente.UseVisualStyleBackColor = true;
+            this.btnNuevoCliente.Click += new System.EventHandler(this.btnNuevoCliente_Click);
+            // 
+            // lNApp
+            // 
+            this.lNApp.ActiveLinkColor = System.Drawing.Color.Indigo;
+            this.lNApp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lNApp.Font = new System.Drawing.Font("Segoe Script", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lNApp.LinkColor = System.Drawing.Color.Black;
+            this.lNApp.Location = new System.Drawing.Point(186, 12);
+            this.lNApp.Name = "lNApp";
+            this.lNApp.Size = new System.Drawing.Size(428, 40);
+            this.lNApp.TabIndex = 6;
+            this.lNApp.TabStop = true;
+            this.lNApp.Text = "GesReserv";
+            this.lNApp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lNApp.VisitedLinkColor = System.Drawing.Color.Black;
+            // 
             // VentanaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lNApp);
+            this.Controls.Add(this.btnNuevoCliente);
             this.Controls.Add(this.btnNuevaReserva);
             this.Controls.Add(this.btnMes);
             this.Controls.Add(this.btnAntMes);
@@ -117,6 +176,8 @@
         private System.Windows.Forms.Button btnAntMes;
         private System.Windows.Forms.Button btnMes;
         private System.Windows.Forms.Button btnNuevaReserva;
+        private System.Windows.Forms.Button btnNuevoCliente;
+        private System.Windows.Forms.LinkLabel lNApp;
     }
 }
 
