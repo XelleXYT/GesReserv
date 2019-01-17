@@ -37,10 +37,11 @@ namespace GesReserv
             }
 
 
+            // Nuevo hilo de ejecución que permite cargar los colores de las casillas una vez ha terminado de arrancar el programa.
             new Thread(() =>
             {
                 Thread.CurrentThread.IsBackground = true;
-                Thread.Sleep(1000);
+                Thread.Sleep(1000); // Espera 1 segundo.
                 cargaColores();
                 cargaHabitaciones();
             }).Start();
