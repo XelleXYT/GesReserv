@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NuevaReserva));
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.dtpFechaEntrada = new System.Windows.Forms.DateTimePicker();
             this.dtpFechaSalida = new System.Windows.Forms.DateTimePicker();
@@ -94,6 +95,7 @@
             // 
             // cbHabitacion
             // 
+            this.cbHabitacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbHabitacion.FormattingEnabled = true;
             this.cbHabitacion.Location = new System.Drawing.Point(123, 24);
             this.cbHabitacion.Name = "cbHabitacion";
@@ -123,6 +125,7 @@
             // 
             // cbCliente
             // 
+            this.cbCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCliente.FormattingEnabled = true;
             this.cbCliente.Location = new System.Drawing.Point(123, 145);
             this.cbCliente.Name = "cbCliente";
@@ -146,6 +149,7 @@
             this.Controls.Add(this.dtpFechaEntrada);
             this.Controls.Add(this.btnEnviar);
             this.Controls.Add(this.btnCancelar);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NuevaReserva";

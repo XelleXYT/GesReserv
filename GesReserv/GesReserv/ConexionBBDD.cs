@@ -26,7 +26,7 @@ namespace GesReserv
             conexion = new MySqlConnection("Server = 127.0.0.1; Database = gesreserv; Uid = root; Pwd = root; Port = 3306");
             conexion.Open();
         }
-        
+
         private void cierraConexion()
         {
             conexion.Close();
@@ -42,7 +42,7 @@ namespace GesReserv
             resultado = comando.ExecuteReader();
 
             datos.Load(resultado);
-            
+
             cierraConexion();
 
             return datos;
@@ -54,7 +54,7 @@ namespace GesReserv
             String f_in = f_entrada.Year + "-" + f_entrada.Month + "-" + f_entrada.Day;
             String f_out = f_salida.Year + "-" + f_salida.Month + "-" + f_salida.Day;
             comando = conexion.CreateCommand();
-            comando.CommandText = "INSERT INTO gesreserv.reservas(fecha_entrada,fecha_salida,cliente,n_habitacion) VALUES('" + f_in +"','"+ f_out +"','"+ cliente +"','"+ n_hab + "');";
+            comando.CommandText = "INSERT INTO gesreserv.reservas(fecha_entrada,fecha_salida,cliente,n_habitacion) VALUES('" + f_in + "','" + f_out + "','" + cliente + "','" + n_hab + "');";
             comando.ExecuteNonQuery();
             cierraConexion();
         }

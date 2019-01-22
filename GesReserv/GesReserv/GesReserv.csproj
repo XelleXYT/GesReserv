@@ -66,6 +66,12 @@
     <Compile Include="NuevaReserva.Designer.cs">
       <DependentUpon>NuevaReserva.cs</DependentUpon>
     </Compile>
+    <Compile Include="NuevoCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NuevoCliente.Designer.cs">
+      <DependentUpon>NuevoCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="VentanaPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +82,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="NuevaReserva.resx">
       <DependentUpon>NuevaReserva.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NuevoCliente.resx">
+      <DependentUpon>NuevoCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VentanaPrincipal.resx">
       <DependentUpon>VentanaPrincipal.cs</DependentUpon>
@@ -102,6 +111,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="logo.ico" />
+    <Content Include="logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

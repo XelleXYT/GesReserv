@@ -16,36 +16,31 @@ namespace GesReserv
         public DataTable datosClientes = new DataTable();
         public DataTable datosHabitaciones = new DataTable();
         public DataTable datosReservas = new DataTable();
-        public DataTable[] calendario = new DataTable[13];
+        public DataTable[,] calendario = new DataTable[3000, 13];
         public ConexionBBDD conexionBBDD;
-        public int mes = 1;
-        private int anno = 2019;
+        public int mes = DateTime.Now.Month;
+        private int anno = DateTime.Now.Year;
+        private bool sync = false;
 
         public VentanaPrincipal()
         {
             InitializeComponent();
             cargaBBDD();
             cargaValores();
-            tablaReservas.DataSource = calendario[mes];
+            tablaReservas.DataSource = calendario[anno, mes];
             //cargaColores();
             //cargaHabitaciones();
 
-            tablaReservas.Columns[0].Visible = false;
-            for (int i = 1; i < tablaReservas.ColumnCount; i++)
-            {
-                tablaReservas.Columns[i].Width = 30;
-            }
-
-
-            // Nuevo hilo de ejecución que permite cargar los colores de las casillas una vez ha terminado de arrancar el programa.
+            /*
+            // Nuevo hilo de ejecución que permite cargar los colores de las casillas una vez ha terminado de arrancar el programa. - Innecesario.
             new Thread(() =>
             {
                 Thread.CurrentThread.IsBackground = true;
-                Thread.Sleep(1000); // Espera 1 segundo.
+                Thread.Sleep(10000); // Espera 1 segundo.
                 cargaColores();
                 cargaHabitaciones();
             }).Start();
-
+            */
         }
 
         // cargaBBDD - Se encarga de cargar los datos de la base de datos en variables de instancia.
@@ -61,19 +56,23 @@ namespace GesReserv
         // cargaValores - Se encarga de crear y mostrar el calendario.
         public void cargaValores()
         {
-            for (int i = 1; i <= 12; i++)
+            for (int year = 2000; year < 2100; year++)
             {
-                calendario[i] = new DataTable();
-                
-                calendario[i].Columns.Add("Habitacion", typeof(String));
-                for (int j = 1; j <= DateTime.DaysInMonth(anno, i); j++)
-                {
-                    calendario[i].Columns.Add(j.ToString(), typeof(String));
-                }
 
-                foreach (DataRow rowHabitaciones in datosHabitaciones.Rows)
+                for (int i = 1; i <= 12; i++)
                 {
-                    calendario[i].Rows.Add(rowHabitaciones.Field<int>(0));
+                    calendario[year, i] = new DataTable();
+
+                    calendario[year, i].Columns.Add("Habitacion", typeof(String));
+                    for (int j = 1; j <= DateTime.DaysInMonth(year, i); j++)
+                    {
+                        calendario[year, i].Columns.Add(j.ToString(), typeof(String));
+                    }
+
+                    foreach (DataRow rowHabitaciones in datosHabitaciones.Rows)
+                    {
+                        calendario[year, i].Rows.Add(rowHabitaciones.Field<int>(0));
+                    }
                 }
             }
             foreach (DataRow rowReservas in datosReservas.Rows)
@@ -91,12 +90,12 @@ namespace GesReserv
                 {
                     int hReserva = rowReservas.Field<int>(4); // Habitación de la reserva.
                     //Console.WriteLine(calendario[fechaAux.Month].Rows.Count); // Consola - Comprueba el número de habitaciones que hay cada mes.
-                    for (int j = 0; j < calendario[fechaAux.Month].Rows.Count; j++) // Por cada habitación.
+                    for (int j = 0; j < calendario[fechaAux.Year, fechaAux.Month].Rows.Count; j++) // Por cada habitación.
                     {
-                        int hCalendario = Convert.ToInt32(calendario[fechaAux.Month].Rows[j][0].ToString()); // Habitación del calendario.
+                        int hCalendario = Convert.ToInt32(calendario[fechaAux.Year, fechaAux.Month].Rows[j][0].ToString()); // Habitación del calendario.
                         if (hReserva == hCalendario) // Si coinciden la habitación de la reserva y la del calendario.
                         {
-                            calendario[fechaAux.Month].Rows[j][fechaAux.Day] = "X"; // Pon una X en la celda del calendario, haciendo coincidir el día y habitación de la reserva.
+                            calendario[fechaAux.Year, fechaAux.Month].Rows[j][fechaAux.Day] = "X"; // Pon una X en la celda del calendario, haciendo coincidir el día y habitación de la reserva.
                         }
                     }
 
@@ -107,14 +106,13 @@ namespace GesReserv
 
 
 
-            tablaReservas.DataSource = calendario[mes];
-            //cargaColores();
+            tablaReservas.DataSource = calendario[anno, mes];
             btnMes.Text = dimeMes(mes) + " - " + anno.ToString();
         }
 
         // cargaHabitaciones - Se encarga de cargar los títulos de las líneas del calendario.
 
-            public void cargaHabitaciones()
+        public void cargaHabitaciones()
         {
             for (int row = 0; row < tablaReservas.RowCount; row++)
             {
@@ -126,6 +124,7 @@ namespace GesReserv
         // cargaColores - Se encarga de cambiar el color y el texto de las celdas reservadas.
         public void cargaColores()
         {
+            tablaReservas.ClearSelection();
             foreach (DataGridViewRow row in tablaReservas.Rows)
             {
                 foreach (DataGridViewCell cell in row.Cells)
@@ -145,6 +144,17 @@ namespace GesReserv
                         cell.Style.BackColor = Color.LightYellow;
                     }
                 }
+            }
+        }
+
+        // cargaDimensiones - Se encarga de cargar las dimensiones de las columnas.
+        public void cargaDimensiones()
+        {
+            tablaReservas.Columns[0].Visible = false;
+
+            for (int i = 1; i < tablaReservas.ColumnCount; i++)
+            {
+                tablaReservas.Columns[i].Width = 30;
             }
         }
 
@@ -182,6 +192,15 @@ namespace GesReserv
             }
         }
 
+        private void cargaEnClick()
+        {
+            tablaReservas.DataSource = calendario[anno, mes];
+            btnMes.Text = dimeMes(mes) + " - " + anno.ToString();
+            cargaColores();
+            cargaHabitaciones();
+            cargaDimensiones();
+        }
+
         // 
 
         private void btnSigMes_Click(object sender, EventArgs e)
@@ -189,9 +208,16 @@ namespace GesReserv
             if (mes < 12)
             {
                 mes++;
-                tablaReservas.DataSource = calendario[mes];
-                btnMes.Text = dimeMes(mes) + " - " + anno.ToString();
-                cargaColores();
+                cargaEnClick();
+            }
+            if (mes == 12)
+            {
+                if (anno < 2099 && anno > 2000)
+                {
+                    mes = 1;
+                    anno++;
+                    cargaEnClick();
+                }
             }
         }
 
@@ -200,9 +226,16 @@ namespace GesReserv
             if (mes > 1)
             {
                 mes--;
-                tablaReservas.DataSource = calendario[mes];
-                btnMes.Text = (dimeMes(mes) + " - " + anno.ToString());
-                cargaColores();
+                cargaEnClick();
+            }
+            if (mes == 1)
+            {
+                if (anno < 2099 && anno > 2000)
+                {
+                    anno--;
+                    mes = 12;
+                    cargaEnClick();
+                }
             }
         }
 
@@ -210,6 +243,8 @@ namespace GesReserv
         {
             NuevaReserva nr = new NuevaReserva(this);
             nr.Show();
+            tablaReservas.ClearSelection();
+            this.Enabled = false;
         }
 
         private void tablaReservas_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -222,8 +257,16 @@ namespace GesReserv
 
         private void btnNuevoCliente_Click(object sender, EventArgs e)
         {
-            NuevaReserva nr = new NuevaReserva(this);
-            nr.Show();
+            NuevoCliente nc = new NuevoCliente(this);
+            nc.Show();
+            tablaReservas.ClearSelection();
+            this.Enabled = false;
+        }
+
+        // VentanaPrincipal_Load - Ejecuta el método al terminar de cargar la solución.
+        private void VentanaPrincipal_Load(object sender, EventArgs e)
+        {
+            cargaEnClick();
         }
     }
 
