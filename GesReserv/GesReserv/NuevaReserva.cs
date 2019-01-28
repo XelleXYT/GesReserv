@@ -58,7 +58,7 @@ namespace GesReserv
             {
                 try
                 {
-                    conexionBBDD.insertaDatos(dtpFechaEntrada.Value.Date, dtpFechaSalida.Value.Date, cbCliente.Text, cbHabitacion.Text);
+                    conexionBBDD.insertaDatosReserva(dtpFechaEntrada.Value.Date, dtpFechaSalida.Value.Date, cbCliente.Text, cbHabitacion.Text);
                     MessageBox.Show("Reserva añadida correctamnte.", "Reserva añadida");
                     ventanaPrincipal.mes = dtpFechaEntrada.Value.Month;
                     ventanaPrincipal.cargaBBDD();

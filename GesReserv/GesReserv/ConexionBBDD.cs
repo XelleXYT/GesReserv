@@ -48,13 +48,22 @@ namespace GesReserv
             return datos;
         }
 
-        public void insertaDatos(DateTime f_entrada, DateTime f_salida, String cliente, String n_hab)
+        public void insertaDatosReserva(DateTime f_entrada, DateTime f_salida, String cliente, String n_hab)
         {
             iniciaConexion();
             String f_in = f_entrada.Year + "-" + f_entrada.Month + "-" + f_entrada.Day;
             String f_out = f_salida.Year + "-" + f_salida.Month + "-" + f_salida.Day;
             comando = conexion.CreateCommand();
             comando.CommandText = "INSERT INTO gesreserv.reservas(fecha_entrada,fecha_salida,cliente,n_habitacion) VALUES('" + f_in + "','" + f_out + "','" + cliente + "','" + n_hab + "');";
+            comando.ExecuteNonQuery();
+            cierraConexion();
+        }
+
+        public void insertaDatosCliente(String dni, String nombre, String telefono)
+        {
+            iniciaConexion();
+            comando = conexion.CreateCommand();
+            comando.CommandText = "INSERT INTO gesreserv.clientes(dni,nombre,telefono) VALUES('" + dni + "','" + nombre + "'," + telefono + ");";
             comando.ExecuteNonQuery();
             cierraConexion();
         }

@@ -18,6 +18,7 @@ namespace GesReserv
         {
             InitializeComponent();
             ventanaPrincipal = _ventanaPrincipal;
+            conexionBBDD = ventanaPrincipal.conexionBBDD;
         }
 
         //Método de establecimiento de acción en cierre.
@@ -31,6 +32,25 @@ namespace GesReserv
         {
             ventanaPrincipal.Enabled = true;
             this.Dispose();
+        }
+
+        private void btnEnviar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                conexionBBDD.insertaDatosCliente(tbDNI.Text, tbNombre.Text, tbTelefono.Text);
+                MessageBox.Show("Cliente añadido correctamnte.", "Cliente añadido");
+                ventanaPrincipal.cargaBBDD();
+                ventanaPrincipal.cargaValores();
+                ventanaPrincipal.cargaColores();
+                ventanaPrincipal.cargaHabitaciones();
+                ventanaPrincipal.Enabled = true;
+                this.Dispose();
+            }
+            catch
+            {
+                MessageBox.Show("Error al añadir el cliente.", "Error al añadir el cliente");
+            }
         }
     }
 }
